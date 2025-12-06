@@ -1,16 +1,20 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import { useState } from 'react'
-
+import {useNavigate} from 'react-router-dom'
 function Create() {
     const [values, setValues]= useState({
         name:'',
         email:'',
     })
+    const navigate = useNavigate();
     const handleSubmit =(e)=>{
         e.preventDefault();
         axios.post('http://localhost:8081/student',values)
-        .then(res=> console.log(res))
+        .then(res=> {
+            console.log(res);
+            navigate('/')
+        })
         .catch(err => console.log(err))
     }
     return (
