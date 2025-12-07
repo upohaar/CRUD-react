@@ -31,7 +31,17 @@ app.post('/student',(req,res)=> {
         return res.json(result);
     })
 })
+app.get('/read/:id', (req, res) => {
+    const sql = "SELECT * FROM student WHERE ID = ?";
+    const id = req.params.id;
 
+    db.query(sql, [id],(err, result) => {
+        if(err) {
+            return res.json({Message: "Error inside server"});
+        }
+        return res.json(result);
+    });    
+});
 app.listen(8081, ()=> {
     console.log("The port is listening...");
 })
